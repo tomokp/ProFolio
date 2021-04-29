@@ -19,57 +19,35 @@ export default {
                 console.log(`Error while creating stock ${e.message}`);
             }
         },
-        modifyStation: async (parents, args) => {
+        modifyStock: async (parents, args) => {
             try {
-                const stationId = args.id;
-                const connections = args.Connections;
-                const stationData = {
-                    Title: args.Title,
-                    AddressLine1: args.AddressLine1,
-                    Town: args.Town,
-                    StateOrProvidence: args.StateOrProvidence,
-                    Postcode: args.Postcode,
+                const stockId = args.id;
+                const stockData = {
+                    Symbol: args.Symbol,
+                    StockName: args.StockName,
+                    Price: args.Price,
                 };
 
-                const stationUpdateData = await Station.findByIdAndUpdate(
-                    stationId,
-                    stationData,
+                const stockUpdateData = await Stock.findByIdAndUpdate(
+                    stockId,
+                    stockData,
                     {
                         new: true,
                     }
                 );
 
-                if (connections) {
-                    const connectionID = connections[0].id;
-                    const connectionData = {
-                        ConnectionTypeID: connections[0].ConnectionTypeID,
-                        CurrentTypeID: connections[0].CurrentTypeID,
-                        LevelID: connections[0].LevelID,
-                        Quantity: connections[0].Quantity,
-                    };
-                    try {
-                        await Connection.findByIdAndUpdate(connectionID, connectionData, {
-                            new: true,
-                        });
-                    } catch (e) {
-                        console.log(
-                            `Error while updating connection ${e.message}`
-                        );
-                    }
-                }
-
-                return stationUpdateData.save();
+                return stockUpdateData.save();
             } catch (e) {
-                console.log(`Error while updating station ${e.message}`);
+                console.log(`Error while updating stock ${e.message}`);
             }
         },
-        deleteStation: async (parent, args) => {
+        deleteStock: async (parent, args) => {
             try {
                 const id = args.id;
-                await Station.findByIdAndDelete(id);
+                await Stock.findByIdAndDelete(id);
                 return id;
             } catch (e) {
-                console.log(`Error while deleting station ${e.message}`);
+                console.log(`Error while deleting stock ${e.message}`);
             }
         },
     },
