@@ -1,61 +1,22 @@
-import Station from '../models/station.js';
-import { bounds } from '../helpers/boundHelper.js';
-import Connection from '../models/connection.js';
+import Stock from '../models/stock.js';
 
 export default {
     Query: {
-        stations: async (parent, args) => {
-            try {
-                const start = args.start ? parseInt(args.start) : 0;
-                const limit = args.limit ? parseInt(args.limit) : 10;
-
-                let res;
-                if (args.bounds) {
-                    const area = bounds(args.bounds.northEast, args.bounds.southWest);
-                    res = await Station.find().skip(start).limit(limit).where('Location').within(area);
-                } else {
-                    res = await Station.find().skip(start).limit(limit);
-                }
-                return res;
-            } catch (e) {
-                console.log(`Error while getting stations: ${e.message}`);
-            }
-        },
-        station: async (parent, args) => {
-            return Station.findById(args.id);
-        },
+        stocks: () => Stock.find(),
     },
     Mutation: {
-        addStation: async (parent, args) => {
+        addStock: async (parent, args) => {
             try {
-                const stationData = { ...args };
+                const stockData = { ...args };
 
-                const connections = args.Connections;
-                const connectionIds = await Promise.all(
-                    connections.map(async (con) => {
-                        try {
-                            const newConnection = new Connection(con);
-                            await newConnection.save();
-                            return newConnection._id;
-                        } catch (e) {
-                            console.log(
-                                `Error while creating connection ${e.message}`
-                            );
-                        }
-                    })
-                );
-
-                stationData.Location.type = 'Point';
-
-                const newStation = new Station({
-                    ...stationData,
-                    Connections: connectionIds,
+                const newStock = new Stock({
+                    ...stockData,
                 });
 
-                newStation.save();
-                return newStation;
+                newStock.save();
+                return newStock;
             } catch (e) {
-                console.log(`Error while creating station ${e.message}`);
+                console.log(`Error while creating stock ${e.message}`);
             }
         },
         modifyStation: async (parents, args) => {

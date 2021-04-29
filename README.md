@@ -1,6 +1,6 @@
 # chargemap-gql
 
-example requests: http://node152666-chargemaptom.jelastic.metropolia.fi/graphql (live) or http://localhost:3000/graphql (locally)
+example requests: http://node152667-chargemaptom.jelastic.metropolia.fi/graphql or http://localhost:3000/graphql (locally)
 
 ```graphql
 # get stations by boundaries
@@ -147,7 +147,27 @@ mutation {
   }
 }
 
-# modify station
+# modify station (if you want to use separate variables)
+mutation ExampleWithVariables($id: ID!, $Connections: [ConnectionInput], $Postcode: String, $Title: String, $AddressLine1: String, $StateOrProvince: String, $Town: String) {
+ modifyStation(    
+   id: $id,
+   Connections: $Connections,
+   Postcode: $Postcode,
+   Title: $Title,
+   AddressLine1: $AddressLine1,
+   StateOrProvince: $StateOrProvince,
+   Town: $Town,
+ )
+ {
+   Title
+   AddressLine1
+   Town
+ }
+}
+
+# variables for modify station, note that format is JSON
+{"id":"someStationID","Connections":[{"id":"someConnectionID","Quantity":3,"ConnectionTypeID":"someConnectionTypeID","LevelID":"someLevelID","CurrentTypeID":"someCurrentTypeID"}],"Postcode":"02720","Title":"Lähisd","AddressLine1":"Sanansaattajanpolku","StateOrProvince":"Uusimaa","Town":"Espoo"}
+
 
 #delete station
 mutation
