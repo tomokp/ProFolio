@@ -7,7 +7,7 @@
     },
     "production": {
         "PORT": 3000,
-        "MONGODB_URI": "mongodb://pfuser:admin@node152666-chargemaptom.jelastic.metropolia.fi:27017/profolio",
+        "MONGODB_URI": "",
         "JWT_SECRET": "SECRET#123",
         "JWT_EXP": "2m"
     }
