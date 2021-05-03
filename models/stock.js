@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const stockSchema = new mongoose.Schema({
     Symbol: String,
@@ -6,4 +7,4 @@ const stockSchema = new mongoose.Schema({
     Price: String,
 });
 
-export default mongoose.model('Stock', stockSchema);
+module.exports = mongoose.model('Stock', stockSchema);

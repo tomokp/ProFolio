@@ -1,27 +1,28 @@
 {
-  "name": "profolio",
+  "name": "project",
   "version": "1.0.0",
-  "description": "example requests: http://node152667-chargemaptom.jelastic.metropolia.fi/graphql (live) or http://localhost:3000/graphql (locally)",
-  "main": "index.js",
+  "description": "",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": ""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "",
-  "type": "module",
   "dependencies": {
-    "apollo-server-express": "^2.22.2",
-    "dotenv": "^8.0.0",
-    "express": "^4.17.1",
+    "apollo-server-express": "^2.24.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
     "graphql": "^15.5.0",
-    "mongoose": "^5.12.3",
-    "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.7"
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.10",
+    "mongoose": "^5.1.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "babel-cli": "^6.26.0"
   }
 }

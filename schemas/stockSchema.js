@@ -1,16 +1,18 @@
-import { gql } from 'apollo-server-express';
+// import { gql } from 'apollo-server-express';
+const { gql } = require('apollo-server-express');
 
-export default gql`
+const typeDefs = gql`
     type Stock {
         id: ID
         Symbol: String
         Stockname: String
         Price: String
     }
-    extend type Query {
+    type Query {
         stocks: [Stock]
+        stock(id: ID!): Stock
     }
-    extend type Mutation {
+    type Mutation {
         addStock(
             Symbol: String
             Stockname: String
@@ -25,3 +27,5 @@ export default gql`
         deleteStock(id: ID!): ID
       }
 `;
+
+module.exports = { typeDefs };

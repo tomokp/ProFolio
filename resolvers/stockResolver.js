@@ -1,8 +1,14 @@
-import Stock from '../models/stock.js';
+// import Stock from '../models/stock.js';
+const Stock = require('../models/stock.js');
 
-export default {
+const resolvers = {
     Query: {
-        stocks: () => Stock.find(),
+        stocks() { 
+            return Stock.find();
+        },
+        stock(parents, args) {
+            return Stock.findById(args.id);
+        },
     },
     Mutation: {
         addStock: async (parent, args) => {
@@ -52,3 +58,5 @@ export default {
         },
     },
 };
+
+module.exports = { resolvers };
